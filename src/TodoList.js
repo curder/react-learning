@@ -34,7 +34,9 @@ class TodoList extends Component {
     return (
       <Fragment>
         <div>
+          <label htmlFor="inputArea">输入内容</label>
           <input
+            id="inputArea"
             value={this.state.inputValue}
             onChange={this.handleChange.bind(this)}
           />
@@ -42,7 +44,7 @@ class TodoList extends Component {
         </div>
         <ul>
           {this.state.list.map((item, index) => {
-            return <li onClick={this.handleDelete.bind(this, index)} key={index}>{item}</li>;
+            return <li onClick={this.handleDelete.bind(this, index)} dangerouslySetInnerHTML={{__html: item}} key={index} />;
           })}
         </ul>
       </Fragment>
