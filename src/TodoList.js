@@ -16,6 +16,14 @@ class TodoList extends Component {
     });
   }
 
+  handleDelete(index) {
+    const list = [...this.state.list];
+    list.splice(index, 1);
+    this.setState({
+      list
+    })
+  }
+
   handleChange(e) {
     this.setState({
       inputValue: e.target.value
@@ -34,7 +42,7 @@ class TodoList extends Component {
         </div>
         <ul>
           {this.state.list.map((item, index) => {
-            return <li key={index}>{item}</li>;
+            return <li onClick={this.handleDelete.bind(this, index)} key={index}>{item}</li>;
           })}
         </ul>
       </Fragment>
