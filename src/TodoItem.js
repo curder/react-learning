@@ -7,6 +7,10 @@ class TodoItem extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  componentWillUnmount() { // 当组件被销毁时执行
+    console.log('children componentWillUnmount()');
+  }
+
   handleDelete() {
     const {deleteItem, index} = this.props;
     deleteItem(index);

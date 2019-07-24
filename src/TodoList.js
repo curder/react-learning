@@ -16,6 +16,28 @@ class TodoList extends Component {
     };
   }
 
+  // 组件生命周期：http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+  componentWillMount() { // 组件即将被挂载到页面时执行
+    console.log('componentWillMount()');
+  }
+
+  componentDidMount() { // 组件被挂载到页面后被执行
+    console.log('componentDidMount()');
+  }
+
+  shouldComponentUpdate() { // 组件被更新之前被执行
+    console.log('shouldComponentUpdate()');
+    return true; // 生命周期函数 shouldComponentUpdate 必须返回一个bool值，允许或阻止组件更新
+  }
+
+  componentWillUpdate() { // 组件被更新之前执行 Tips: 当 shouldComponentUpdate 返回 true，才执行；如果 shouldComponentUpdate 返回 false，则不执行
+    console.log('componentWillUpdate()');
+  }
+
+  componentDidUpdate() { // 组件被更新后执行 Tips: 当 shouldComponentUpdate 返回 true，才执行；如果 shouldComponentUpdate 返回 false，则不执行
+    console.log('componentDidUpdate()');
+  }
+
   handleSubmit() { // 处理提交事件，将input框中的数据提交到state对象中的list中
     this.setState((state, props) => {
       return {
