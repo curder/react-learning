@@ -7,6 +7,10 @@ class TodoItem extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  shouldComponentUpdate(props, state) { // 使用生命周期函数提升组件性能
+    return props.item !== this.props.item;
+  }
+
   componentWillUnmount() { // 当组件被销毁时执行
     console.log('children componentWillUnmount()');
   }
