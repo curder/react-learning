@@ -13,10 +13,10 @@ class TodoItem extends Component {
   }
 
   render() {
-    const {item} = this.props;
+    const {item, defaultValue} = this.props; // 如果父组件不给自组件传递 defaultValue 属性，则使用自组件定义的defaultProps中的值
     return (
       <li onClick={this.handleDelete}>
-        {item}
+        {item ? item : defaultValue}
       </li>
     );
   }
@@ -26,6 +26,10 @@ TodoItem.propTypes = {
   index: PropTypes.number.isRequired,
   item: PropTypes.string.isRequired,
   deleteItem: PropTypes.func.isRequired
+};
+
+TodoItem.defaultProps = {
+  defaultValue: 'Default Value'
 };
 
 export default TodoItem;
