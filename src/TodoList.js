@@ -4,48 +4,59 @@ import TodoItem from "./TodoItem";
 class TodoList extends Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+
     this.state = {
       list: [],
       inputValue: ""
     };
   }
 
-  handleSubmit() {
-    this.setState({
-      list: [...this.state.list, this.state.inputValue],
-      inputValue: ""
+  handleSubmit() { // 处理提交事件，将input框中的数据提交到state对象中的list中
+    this.setState((state, props) => {
+      return {
+        list: [...state.list, state.inputValue],
+        inputValue: ""
+      }
     });
   }
 
   handleDelete(index) {
-    const list = [...this.state.list];
-    list.splice(index, 1);
-    this.setState({
-      list
+    this.setState((state, props) => {
+      const list = [...state.list];
+      list.splice(index, 1);
+      return {
+        list
+      }
     });
   }
 
   handleChange(e) {
-    this.setState({
-      inputValue: e.target.value
-    });
+    const inputValue = e.target.value; // 将修改的值赋值给临时变量，方便下面的异步函数的使用
+    this.setState(() => {
+        return {inputValue};
+      }
+    );
   }
 
   render() {
+    const {inputValue, list} = this.state;
+
     return (
       <Fragment>
         <div>
           <label htmlFor="inputArea">输入内容</label>
           <input
             id="inputArea"
-            value={this.state.inputValue}
-            onChange={this.handleChange.bind(this)}
+            value={inputValue}
+            onChange={this.handleChange}
           />
-          <button onClick={this.handleSubmit.bind(this)}>Submit</button>
+          <button onClick={this.handleSubmit}>Submit</button>
         </div>
         <ul>
-          {this.state.list.map((item, index) => {
+          {list.map((item, index) => {
             return (
               <TodoItem
                 key={index}
