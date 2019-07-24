@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import axios from 'axios';
 import TodoItem from "./TodoItem";
 
 class TodoList extends Component {
@@ -23,6 +24,10 @@ class TodoList extends Component {
 
   componentDidMount() { // 组件被挂载到页面后被执行
     console.log('componentDidMount()');
+    // 组件对外部资源的请求都放在 componentDidMount 中
+    axios.get('/api/todo-list')
+      .then(() => {console.log('success')})
+      .catch(() => {console.log('error')})
   }
 
   shouldComponentUpdate() { // 组件被更新之前被执行
