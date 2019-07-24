@@ -8,6 +8,8 @@ class TodoList extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
 
+    this.textInput = React.createRef(); // https://reactjs.org/docs/refs-and-the-dom.html
+
     this.state = {
       list: [],
       inputValue: ""
@@ -34,7 +36,7 @@ class TodoList extends Component {
   }
 
   handleChange(e) {
-    const inputValue = e.target.value; // 将修改的值赋值给临时变量，方便下面的异步函数的使用
+    const inputValue = this.textInput.current.value; // 将修改的值赋值给临时变量，方便下面的异步函数的使用
     this.setState(() => {
         return {inputValue};
       }
@@ -49,6 +51,7 @@ class TodoList extends Component {
         <div>
           <label htmlFor="inputArea">输入内容</label>
           <input
+            ref={this.textInput}
             id="inputArea"
             value={inputValue}
             onChange={this.handleChange}
