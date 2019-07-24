@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from "react";
+import TodoItem from "./TodoItem";
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       list: [],
       inputValue: ""
@@ -12,7 +14,7 @@ class TodoList extends Component {
   handleSubmit() {
     this.setState({
       list: [...this.state.list, this.state.inputValue],
-      inputValue: ''
+      inputValue: ""
     });
   }
 
@@ -21,7 +23,7 @@ class TodoList extends Component {
     list.splice(index, 1);
     this.setState({
       list
-    })
+    });
   }
 
   handleChange(e) {
@@ -44,7 +46,14 @@ class TodoList extends Component {
         </div>
         <ul>
           {this.state.list.map((item, index) => {
-            return <li onClick={this.handleDelete.bind(this, index)} dangerouslySetInnerHTML={{__html: item}} key={index} />;
+            return (
+              <TodoItem
+                key={index}
+                index={index}
+                deleteItem={this.handleDelete}
+                item={item}
+              />
+            );
           })}
         </ul>
       </Fragment>
